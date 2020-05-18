@@ -2,20 +2,40 @@ import React from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const IndexPage = () => {
+
+  const stripe = window.Stripe("pk_test_VHkZtUPbeQs29wIEEUpe6CQI")
+  
+  const placeOrder = (sku) => {
+    stripe.redirectToCheckout({
+      items: [
+        {
+          sku,
+          quantity: 1,
+        },
+      ],
+      successUrl: "http://localhost:8000/success",
+      cancelUrl: "http://localhost:8000/cancel",
+    })
+  }
+
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <h1>Level Up Store</h1>
+      <div>
+        <article>
+          <img src="https://picsum.photos/340/400" alt="Level Up TShirt" />
+          <h3>Level Up T-Shirts</h3>
+          <button onClick={() => placeOrder("sku_HIteQ4VNRPobol")}>
+            Buy Me
+          </button>
+        </article>
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
