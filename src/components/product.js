@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 const Product = () => {
-  const stripe = window.Stripe("pk_test_VHkZtUPbeQs29wIEEUpe6CQI")
+  const stripe = window.Stripe(process.env.PUBLISHABLE_KEY)
   const [sku, setSku] = useState("sku_HIuQrKxYnguqJ3")
 
   const placeOrder = () => {

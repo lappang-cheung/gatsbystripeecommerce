@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Level Up Store`,
@@ -12,6 +16,14 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: [`Product`, `Sku`],
+        secretKey: process.env.SECRET_KEY,
+        downloadFiles: true,
       },
     },
     `gatsby-transformer-sharp`,
