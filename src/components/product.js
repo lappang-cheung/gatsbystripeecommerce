@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Product = () => {
+const Product = ({skus, product}) => {
   const stripe = window.Stripe(process.env.PUBLISHABLE_KEY)
   const [sku, setSku] = useState("sku_HIuQrKxYnguqJ3")
 
@@ -20,7 +20,7 @@ const Product = () => {
   return (
     <article>
         <img src="https://picsum.photos/340/400" alt="Level Up TShirt" />
-        <h3>Level Up T-Shirts</h3>
+        <h3>{product.name}</h3>
         <select defaultValue={sku} onChange={e => setSku(e.target.value)}>
         <option value="sku_HIuQrKxYnguqJ3">Small</option>
         <option value="sku_HIuQTWh9gerR0a">Medium</option>
